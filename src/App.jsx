@@ -205,34 +205,38 @@ const FloatingTechBackground = () => {
   );
 };
 
-// --- HERO PHOTO SECTION WITH BALANCED PERFECTLY SCALED HOVER EFFECT ---
+// --- HERO PHOTO SECTION WITH MOBILE TOUCH-SAFE HOVER ---
 const HeroPhotoWithInteractiveLogos = () => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Optimized arch radii & icon sizing for prominent hover without overlap
   const customIcons = [
-    { img: reIcon, name: "React", angle: -175, radius: 140, hoverRadius: 175, delay: 0 },
-    { img: jsIcon, name: "JavaScript", angle: -140, radius: 145, hoverRadius: 180, delay: 0.08 },
-    { img: javaIcon, name: "Java", angle: -105, radius: 150, hoverRadius: 185, delay: 0.16 },
-    { img: aiIcon, name: "AI", angle: -70, radius: 145, hoverRadius: 180, delay: 0.24 },
-    { img: codeIcon, name: "Code", angle: -35, radius: 140, hoverRadius: 175, delay: 0.32 },
-    { img: vsIcon, name: "VS Code", angle: 0, radius: 135, hoverRadius: 170, delay: 0.4 }
+    { img: reIcon, name: "React", angle: -175, radius: 120, hoverRadius: 155, delay: 0 },
+    { img: jsIcon, name: "JavaScript", angle: -140, radius: 125, hoverRadius: 160, delay: 0.08 },
+    { img: javaIcon, name: "Java", angle: -105, radius: 130, hoverRadius: 165, delay: 0.16 },
+    { img: aiIcon, name: "AI", angle: -70, radius: 125, hoverRadius: 160, delay: 0.24 },
+    { img: codeIcon, name: "Code", angle: -35, radius: 120, hoverRadius: 155, delay: 0.32 },
+    { img: vsIcon, name: "VS Code", angle: 0, radius: 115, hoverRadius: 150, delay: 0.4 }
   ];
 
   return (
     <div 
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => {
+        // Only trigger hover state on desktop devices with hover support
+        if (window.matchMedia('(hover: hover)').matches) {
+          setIsHovered(true);
+        }
+      }}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative flex justify-center items-center group cursor-pointer w-full"
+      className="relative flex justify-center items-center group cursor-pointer w-full select-none"
     >
       {/* Dynamic Purple Backglow Aura */}
       <motion.div 
         animate={{ 
-          scale: isHovered ? [1.08, 1.15, 1.08] : [1, 1.05, 1], 
-          opacity: isHovered ? 0.9 : 0.45 
+          scale: isHovered ? [1.05, 1.12, 1.05] : [1, 1.04, 1], 
+          opacity: isHovered ? 0.85 : 0.4 
         }}
         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-        className="absolute w-[220px] sm:w-[300px] md:w-[380px] h-[260px] sm:h-[350px] md:h-[440px] rounded-full bg-gradient-to-t from-purple-600 via-indigo-600 to-violet-900 blur-[50px] sm:blur-[70px] pointer-events-none transition-all duration-500"
+        className="absolute w-[200px] sm:w-[280px] md:w-[360px] h-[240px] sm:h-[330px] md:h-[420px] rounded-full bg-gradient-to-t from-purple-600 via-indigo-600 to-violet-900 blur-[45px] sm:blur-[65px] pointer-events-none transition-all duration-500"
       />
 
       {/* HALF-CIRCLE ARCH TECH LOGOS */}
@@ -246,13 +250,13 @@ const HeroPhotoWithInteractiveLogos = () => {
           return (
             <motion.div
               key={idx}
-              initial={{ x, y, opacity: 0.25, scale: 0.75 }}
+              initial={{ x, y, opacity: 0.2, scale: 0.7 }}
               animate={{
                 x,
                 y,
-                opacity: isHovered ? 1 : 0.25,
-                scale: isHovered ? 1.15 : 0.75,
-                rotate: isHovered ? [0, 8, -8, 0] : 0
+                opacity: isHovered ? 1 : 0.2,
+                scale: isHovered ? 1.1 : 0.7,
+                rotate: isHovered ? [0, 6, -6, 0] : 0
               }}
               transition={{
                 type: "spring",
@@ -263,18 +267,18 @@ const HeroPhotoWithInteractiveLogos = () => {
               className="absolute flex flex-col items-center justify-center select-none"
             >
               <motion.span 
-                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? -16 : 0 }}
+                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? -14 : 0 }}
                 transition={{ duration: 0.2, delay: item.delay }}
-                className="text-[9px] sm:text-[10px] font-mono font-bold text-purple-200 bg-purple-950/90 border border-purple-500/40 px-1.5 py-0.5 rounded-md shadow-[0_0_10px_rgba(168,85,247,0.5)] mb-1 whitespace-nowrap pointer-events-none"
+                className="text-[8px] sm:text-[9px] font-mono font-bold text-purple-200 bg-purple-950/90 border border-purple-500/40 px-1 py-0.5 rounded-md shadow-[0_0_8px_rgba(168,85,247,0.5)] mb-0.5 whitespace-nowrap pointer-events-none"
               >
                 {item.name}
               </motion.span>
 
-              <div className="w-6 h-6 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center">
+              <div className="w-5 h-5 sm:w-9 sm:h-9 md:w-11 md:h-11 flex items-center justify-center">
                 <img 
                   src={item.img} 
                   alt={item.name} 
-                  className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(192,132,252,0.85)] transition-all duration-300"
+                  className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(192,132,252,0.8)] transition-all duration-300"
                 />
               </div>
             </motion.div>
@@ -283,7 +287,7 @@ const HeroPhotoWithInteractiveLogos = () => {
       </div>
 
       <TiltCard className="relative z-10 flex flex-col items-center w-full">
-        <div className="relative overflow-hidden rounded-b-3xl max-w-[200px] sm:max-w-[290px] md:max-[#370px]">
+        <div className="relative overflow-hidden rounded-b-3xl max-w-[180px] sm:max-w-[270px] md:max-w-[350px]">
           <img 
             src={myPhoto}
             alt="Deepmala Halder" 
@@ -296,10 +300,10 @@ const HeroPhotoWithInteractiveLogos = () => {
         </div>
 
         <div 
-          style={{ transform: "translateZ(25px)" }} 
-          className="absolute -bottom-1.5 right-0 z-20 pointer-events-none"
+          style={{ transform: "translateZ(20px)" }} 
+          className="absolute -bottom-1 right-0 z-20 pointer-events-none"
         >
-          <span className="font-serif italic text-xl sm:text-3xl md:text-4xl text-purple-200 drop-shadow-[0_0_15px_rgba(168,85,247,0.8)]">
+          <span className="font-serif italic text-lg sm:text-2xl md:text-3xl text-purple-200 drop-shadow-[0_0_12px_rgba(168,85,247,0.8)]">
             Deepmala Halder
           </span>
         </div>
@@ -316,8 +320,8 @@ const TiltCard = ({ children, className = "" }) => {
   const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
   const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["8deg", "-8deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-8deg", "8deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -669,7 +673,7 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="shrink-0 w-[40%] sm:w-[42%] max-w-[370px] flex justify-center items-center"
+            className="shrink-0 w-[40%] sm:w-[42%] max-w-[360px] flex justify-center items-center"
           >
             <HeroPhotoWithInteractiveLogos />
           </motion.div>
@@ -718,7 +722,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* SKILLS & TECH MATRIX SECTION - 3-3 ALIGNED GRID */}
+      {/* SKILLS & TECH MATRIX SECTION - 3 COLUMNS ALIGNED */}
       <section id="skills" className="py-16 px-6 sm:px-12 max-w-7xl mx-auto">
         <div className="mb-10 text-center max-w-2xl mx-auto">
           <span className="text-purple-400 text-xs tracking-[0.25em] font-semibold uppercase bg-purple-950/60 border border-purple-800/40 px-4 py-1.5 rounded-full inline-block mb-3">
