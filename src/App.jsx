@@ -205,54 +205,54 @@ const FloatingTechBackground = () => {
   );
 };
 
-// --- HERO PHOTO SECTION WITH LOW-OPACITY IDLE ARCH LOGOS ---
+// --- HERO PHOTO SECTION WITH BALANCED PERFECTLY SCALED HOVER EFFECT ---
 const HeroPhotoWithInteractiveLogos = () => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // 6 Tech Icons along a semi-circle arch
+  // Optimized arch radii & icon sizing for prominent hover without overlap
   const customIcons = [
-    { img: reIcon, name: "React", angle: -175, radius: 220, hoverRadius: 255, delay: 0 },
-    { img: jsIcon, name: "JavaScript", angle: -140, radius: 225, hoverRadius: 260, delay: 0.08 },
-    { img: javaIcon, name: "Java", angle: -105, radius: 230, hoverRadius: 265, delay: 0.16 },
-    { img: aiIcon, name: "AI", angle: -70, radius: 225, hoverRadius: 260, delay: 0.24 },
-    { img: codeIcon, name: "Code", angle: -35, radius: 220, hoverRadius: 255, delay: 0.32 },
-    { img: vsIcon, name: "VS Code", angle: 0, radius: 215, hoverRadius: 250, delay: 0.4 }
+    { img: reIcon, name: "React", angle: -175, radius: 140, hoverRadius: 175, delay: 0 },
+    { img: jsIcon, name: "JavaScript", angle: -140, radius: 145, hoverRadius: 180, delay: 0.08 },
+    { img: javaIcon, name: "Java", angle: -105, radius: 150, hoverRadius: 185, delay: 0.16 },
+    { img: aiIcon, name: "AI", angle: -70, radius: 145, hoverRadius: 180, delay: 0.24 },
+    { img: codeIcon, name: "Code", angle: -35, radius: 140, hoverRadius: 175, delay: 0.32 },
+    { img: vsIcon, name: "VS Code", angle: 0, radius: 135, hoverRadius: 170, delay: 0.4 }
   ];
 
   return (
     <div 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative flex justify-center items-center group cursor-pointer"
+      className="relative flex justify-center items-center group cursor-pointer w-full"
     >
       {/* Dynamic Purple Backglow Aura */}
       <motion.div 
         animate={{ 
-          scale: isHovered ? [1.15, 1.25, 1.15] : [1, 1.08, 1], 
-          opacity: isHovered ? 0.95 : 0.5 
+          scale: isHovered ? [1.08, 1.15, 1.08] : [1, 1.05, 1], 
+          opacity: isHovered ? 0.9 : 0.45 
         }}
         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-        className="absolute w-[360px] sm:w-[440px] h-[420px] sm:h-[520px] rounded-full bg-gradient-to-t from-purple-600 via-indigo-600 to-violet-900 blur-[90px] pointer-events-none transition-all duration-500"
+        className="absolute w-[220px] sm:w-[300px] md:w-[380px] h-[260px] sm:h-[350px] md:h-[440px] rounded-full bg-gradient-to-t from-purple-600 via-indigo-600 to-violet-900 blur-[50px] sm:blur-[70px] pointer-events-none transition-all duration-500"
       />
 
-      {/* HALF-CIRCLE ARCH TECH LOGOS (LOW OPACITY IDLE -> FULL OPACITY ON HOVER) */}
+      {/* HALF-CIRCLE ARCH TECH LOGOS */}
       <div className="absolute inset-0 pointer-events-none z-20 flex items-center justify-center">
         {customIcons.map((item, idx) => {
           const rad = (item.angle * Math.PI) / 180;
           const currentRadius = isHovered ? item.hoverRadius : item.radius;
-          const x = Math.cos(rad) * currentRadius - 15;
-          const y = Math.sin(rad) * currentRadius + 10;
+          const x = Math.cos(rad) * currentRadius;
+          const y = Math.sin(rad) * currentRadius;
 
           return (
             <motion.div
               key={idx}
-              initial={{ x, y, opacity: 0.25, scale: 0.85 }}
+              initial={{ x, y, opacity: 0.25, scale: 0.75 }}
               animate={{
                 x,
                 y,
-                opacity: isHovered ? 1 : 0.25, // Low opacity when not hovered
-                scale: isHovered ? 1.25 : 0.85,
-                rotate: isHovered ? [0, 10, -10, 0] : 0
+                opacity: isHovered ? 1 : 0.25,
+                scale: isHovered ? 1.15 : 0.75,
+                rotate: isHovered ? [0, 8, -8, 0] : 0
               }}
               transition={{
                 type: "spring",
@@ -262,21 +262,19 @@ const HeroPhotoWithInteractiveLogos = () => {
               }}
               className="absolute flex flex-col items-center justify-center select-none"
             >
-              {/* Floating Tooltip Label */}
               <motion.span 
-                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? -22 : 0 }}
+                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? -16 : 0 }}
                 transition={{ duration: 0.2, delay: item.delay }}
-                className="text-[10px] font-mono font-bold text-purple-200 bg-purple-950/80 border border-purple-500/40 px-2 py-0.5 rounded-md shadow-[0_0_10px_rgba(168,85,247,0.5)] mb-1 whitespace-nowrap pointer-events-none"
+                className="text-[9px] sm:text-[10px] font-mono font-bold text-purple-200 bg-purple-950/90 border border-purple-500/40 px-1.5 py-0.5 rounded-md shadow-[0_0_10px_rgba(168,85,247,0.5)] mb-1 whitespace-nowrap pointer-events-none"
               >
                 {item.name}
               </motion.span>
 
-              {/* Transparent PNG Icon */}
-              <div className="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center">
+              <div className="w-6 h-6 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center">
                 <img 
                   src={item.img} 
                   alt={item.name} 
-                  className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(192,132,252,0.9)] transition-all duration-300"
+                  className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(192,132,252,0.85)] transition-all duration-300"
                 />
               </div>
             </motion.div>
@@ -284,13 +282,12 @@ const HeroPhotoWithInteractiveLogos = () => {
         })}
       </div>
 
-      <TiltCard className="relative z-10 flex flex-col items-center">
-        {/* Frameless Image with Bottom Fade Mask */}
-        <div className="relative overflow-hidden rounded-b-3xl">
+      <TiltCard className="relative z-10 flex flex-col items-center w-full">
+        <div className="relative overflow-hidden rounded-b-3xl max-w-[200px] sm:max-w-[290px] md:max-[#370px]">
           <img 
             src={myPhoto}
             alt="Deepmala Halder" 
-            className="w-[350px] sm:w-[420px] h-[440px] sm:h-[500px] object-cover filter brightness-105 contrast-105 group-hover:brightness-110 transition-all duration-500 pointer-events-none"
+            className="w-full h-auto object-cover filter brightness-105 contrast-105 transition-all duration-500 pointer-events-none"
             style={{
               maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%)',
               WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%)'
@@ -298,12 +295,11 @@ const HeroPhotoWithInteractiveLogos = () => {
           />
         </div>
 
-        {/* Glowing Signature Floating Tag */}
         <div 
-          style={{ transform: "translateZ(40px)" }} 
-          className="absolute -bottom-2 right-2 sm:-right-4 z-20 pointer-events-none"
+          style={{ transform: "translateZ(25px)" }} 
+          className="absolute -bottom-1.5 right-0 z-20 pointer-events-none"
         >
-          <span className="font-serif italic text-3xl sm:text-4xl text-purple-200 drop-shadow-[0_0_15px_rgba(168,85,247,0.8)]">
+          <span className="font-serif italic text-xl sm:text-3xl md:text-4xl text-purple-200 drop-shadow-[0_0_15px_rgba(168,85,247,0.8)]">
             Deepmala Halder
           </span>
         </div>
@@ -320,8 +316,8 @@ const TiltCard = ({ children, className = "" }) => {
   const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
   const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["8deg", "-8deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-8deg", "8deg"]);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -562,12 +558,12 @@ export default function App() {
 
       {/* HEADER */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#07050d]/80 backdrop-blur-xl border-b border-purple-900/20">
-        <div className="max-w-7xl mx-auto px-6 sm:px-12 h-20 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-purple-950/80 border border-purple-500/30 flex items-center justify-center text-purple-300 font-extrabold text-sm tracking-wider group-hover:border-purple-400 group-hover:shadow-[0_0_15px_rgba(168,85,247,0.4)] transition-all">
+        <div className="max-w-7xl mx-auto px-4 sm:px-12 h-16 sm:h-20 flex items-center justify-between">
+          <a href="#" className="flex items-center gap-2 sm:gap-3 group">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-purple-950/80 border border-purple-500/30 flex items-center justify-center text-purple-300 font-extrabold text-xs sm:text-sm tracking-wider group-hover:border-purple-400 group-hover:shadow-[0_0_15px_rgba(168,85,247,0.4)] transition-all">
               DH
             </div>
-            <span className="font-semibold text-white tracking-widest text-sm uppercase group-hover:text-purple-300 transition-colors">
+            <span className="font-semibold text-white tracking-widest text-xs sm:text-sm uppercase group-hover:text-purple-300 transition-colors">
               Deepmala Halder
             </span>
           </a>
@@ -594,86 +590,91 @@ export default function App() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="pt-32 sm:pt-40 pb-20 px-6 sm:px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <motion.div 
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-          className="lg:col-span-7 space-y-3"
-        >
-          <motion.div variants={fadeInUp} className="inline-block">
-            <span className="text-purple-400 text-xs tracking-[0.25em] font-semibold uppercase bg-purple-950/60 border border-purple-800/40 px-4 py-1.5 rounded-full">
-              HELLO, I'M
-            </span>
-          </motion.div>
-
-          {/* SAIRA STENCIL ONE TITLE */}
-          <motion.h1 
-            variants={fadeInUp} 
-            className="text-4xl sm:text-6xl font-normal select-none font-['Saira_Stencil_One',sans-serif] leading-tight mb-0"
+      <section className="pt-24 sm:pt-36 pb-12 sm:pb-20 px-4 sm:px-12 max-w-7xl mx-auto">
+        <div className="flex flex-row items-center justify-between gap-3 sm:gap-8">
+          
+          {/* Left Side: Summary & Actions */}
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="flex-1 min-w-[55%] z-10 space-y-2 sm:space-y-3"
           >
-            <div className="text-white filter drop-shadow-[0_0_20px_rgba(168,85,247,0.6)]">
-              <AnimatedLetterTitle text="Deepmala" delayOffset={0.3} letterDelay={0.25} />
-            </div>
-            <div className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-fuchsia-400 to-indigo-300 filter drop-shadow-[0_0_25px_rgba(192,132,252,0.75)] -mt-1">
-              <AnimatedLetterTitle text="Halder" delayOffset={2.2} letterDelay={0.25} />
-            </div>
-          </motion.h1>
+            <motion.div variants={fadeInUp} className="inline-block">
+              <span className="text-purple-400 text-[10px] sm:text-xs tracking-[0.2em] font-semibold uppercase bg-purple-950/60 border border-purple-800/40 px-2.5 sm:px-4 py-1 rounded-full">
+                HELLO, I'M
+              </span>
+            </motion.div>
 
-          <motion.p variants={fadeInUp} className="text-purple-300/80 text-sm sm:text-base font-semibold tracking-wide uppercase pt-1 mb-2">
-            Software Engineer | Frontend & UI/UX Developer
-          </motion.p>
+            {/* TITLE */}
+            <motion.h1 
+              variants={fadeInUp} 
+              className="text-2xl sm:text-5xl md:text-6xl font-normal select-none font-['Saira_Stencil_One',sans-serif] leading-tight mb-0"
+            >
+              <div className="text-white filter drop-shadow-[0_0_20px_rgba(168,85,247,0.6)]">
+                <AnimatedLetterTitle text="Deepmala" delayOffset={0.3} letterDelay={0.15} />
+              </div>
+              <div className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-fuchsia-400 to-indigo-300 filter drop-shadow-[0_0_25px_rgba(192,132,252,0.75)] -mt-1">
+                <AnimatedLetterTitle text="Halder" delayOffset={1.5} letterDelay={0.15} />
+              </div>
+            </motion.h1>
 
-          {/* SLOW WORD-BY-WORD ANIMATED HERO SUMMARY */}
-          <motion.div
-            variants={fadeInUp}
-            whileHover={{ x: 6 }}
-            transition={{ duration: 0.3 }}
-            className="relative pl-4 border-l-2 border-purple-500/50 hover:border-purple-400 transition-colors group mt-2"
+            <motion.p variants={fadeInUp} className="text-purple-300/80 text-[11px] sm:text-sm md:text-base font-semibold tracking-wide uppercase pt-0.5">
+              Software Engineer | Frontend & UI/UX Developer
+            </motion.p>
+
+            {/* WORD-BY-WORD ANIMATED HERO SUMMARY */}
+            <motion.div
+              variants={fadeInUp}
+              whileHover={{ x: 4 }}
+              transition={{ duration: 0.3 }}
+              className="relative pl-3 border-l-2 border-purple-500/50 hover:border-purple-400 transition-colors group mt-1"
+            >
+              <AnimatedWordSummary
+                text="Computer Science graduate (CGPA 8.85) specializing in modern frontend engineering, interactive web applications, and intuitive UI/UX design. Experienced in developing scalable cross-platform systems with React, React Native, and AI integrations. Passionate about transforming complex problem statements into clean, high-performance digital products."
+                className="text-purple-200/80 text-[10px] sm:text-xs md:text-sm max-w-xl leading-relaxed font-normal group-hover:text-purple-100 transition-colors"
+              />
+            </motion.div>
+
+            <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-2 sm:gap-4 pt-2">
+              <a 
+                href="#projects" 
+                className="inline-flex items-center gap-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-[10px] sm:text-xs px-4 sm:px-6 py-2 sm:py-3 rounded-xl shadow-[0_0_25px_rgba(168,85,247,0.4)] transition-all transform hover:-translate-y-0.5"
+              >
+                View My Projects <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
+              </a>
+              <a 
+                href="#contact" 
+                className="inline-flex items-center gap-1.5 bg-[#0d091a] border border-purple-500/30 hover:border-purple-400 text-purple-200 font-semibold text-[10px] sm:text-xs px-4 sm:px-6 py-2 sm:py-3 rounded-xl transition-all hover:bg-purple-950/40 transform hover:-translate-y-0.5"
+              >
+                Let's Collaborate <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
+              </a>
+            </motion.div>
+
+            {/* Trusted Brands */}
+            <motion.div variants={fadeInUp} className="pt-3 sm:pt-4 border-t border-purple-900/30 hidden sm:block">
+              <p className="text-[9px] sm:text-[10px] tracking-widest uppercase text-purple-400/60 mb-2 font-semibold">Trusted by forward-thinking brands</p>
+              <div className="flex flex-wrap gap-4 items-center opacity-60 grayscale hover:grayscale-0 transition-all text-[10px] sm:text-xs font-bold text-purple-300">
+                <span># slack</span>
+                <span>webflow</span>
+                <span>N Notion</span>
+                <span>loom</span>
+                <span>upwork</span>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Side: Hero Portrait */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="shrink-0 w-[40%] sm:w-[42%] max-w-[370px] flex justify-center items-center"
           >
-            <AnimatedWordSummary
-              text="Computer Science graduate (CGPA 8.85) specializing in modern frontend engineering, interactive web applications, and intuitive UI/UX design. Experienced in developing scalable cross-platform systems with React, React Native, and AI integrations. Passionate about transforming complex problem statements into clean, high-performance digital products."
-              className="text-purple-200/80 text-sm sm:text-base max-w-xl leading-relaxed font-normal group-hover:text-purple-100 transition-colors"
-            />
+            <HeroPhotoWithInteractiveLogos />
           </motion.div>
 
-          <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-3">
-            <a 
-              href="#projects" 
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs px-7 py-3.5 rounded-xl shadow-[0_0_25px_rgba(168,85,247,0.4)] transition-all transform hover:-translate-y-0.5"
-            >
-              View My Projects <ArrowRight className="w-4 h-4" />
-            </a>
-            <a 
-              href="#contact" 
-              className="inline-flex items-center gap-2 bg-[#0d091a] border border-purple-500/30 hover:border-purple-400 text-purple-200 font-semibold text-xs px-7 py-3.5 rounded-xl transition-all hover:bg-purple-950/40 transform hover:-translate-y-0.5"
-            >
-              Let's Collaborate <ArrowRight className="w-4 h-4" />
-            </a>
-          </motion.div>
-
-          {/* Trusted Brands */}
-          <motion.div variants={fadeInUp} className="pt-6 border-t border-purple-900/30">
-            <p className="text-[10px] tracking-widest uppercase text-purple-400/60 mb-4 font-semibold">Trusted by forward-thinking brands</p>
-            <div className="flex flex-wrap gap-6 items-center opacity-60 grayscale hover:grayscale-0 transition-all text-xs font-bold text-purple-300">
-              <span># slack</span>
-              <span>webflow</span>
-              <span>N Notion</span>
-              <span>loom</span>
-              <span>upwork</span>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* Hero Portrait with Photo Hover Only Arch */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="lg:col-span-5 relative flex justify-center items-center"
-        >
-          <HeroPhotoWithInteractiveLogos />
-        </motion.div>
+        </div>
       </section>
 
       {/* MY PROJECTS SECTION */}
@@ -717,7 +718,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* SKILLS & TECH MATRIX SECTION */}
+      {/* SKILLS & TECH MATRIX SECTION - 3-3 ALIGNED GRID */}
       <section id="skills" className="py-16 px-6 sm:px-12 max-w-7xl mx-auto">
         <div className="mb-10 text-center max-w-2xl mx-auto">
           <span className="text-purple-400 text-xs tracking-[0.25em] font-semibold uppercase bg-purple-950/60 border border-purple-800/40 px-4 py-1.5 rounded-full inline-block mb-3">
@@ -729,7 +730,7 @@ export default function App() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
           {skillCategories.map((item, idx) => {
             const IconComponent = item.icon;
             return (
