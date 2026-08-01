@@ -657,13 +657,13 @@ export default function App() {
 
             {/* Trusted Brands */}
             <motion.div variants={fadeInUp} className="pt-3 sm:pt-4 border-t border-purple-900/30 hidden sm:block">
-              <p className="text-[9px] sm:text-[10px] tracking-widest uppercase text-purple-400/60 mb-2 font-semibold">Trusted by forward-thinking brands</p>
+              <p className="text-[9px] sm:text-[10px] tracking-widest uppercase text-purple-400/60 mb-2 font-semibold">Featured In</p>
               <div className="flex flex-wrap gap-4 items-center opacity-60 grayscale hover:grayscale-0 transition-all text-[10px] sm:text-xs font-bold text-purple-300">
-                <span># slack</span>
-                <span>webflow</span>
-                <span>N Notion</span>
-                <span>loom</span>
-                <span>upwork</span>
+                <span>fullstack</span>
+                <span>webdesign</span>
+                <span>UI</span>
+                <span>UX</span>
+                <span>frontend</span>
               </div>
             </motion.div>
           </motion.div>
@@ -957,7 +957,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* CTA SECTION WITH 3D IMAGE GRAPHIC */}
+      {/* CTA SECTION WITH GOOGLE FORM LINKED BUTTON */}
       <section id="contact" className="py-20 px-6 sm:px-12 max-w-7xl mx-auto">
         <div className="bg-gradient-to-r from-[#0f0a21] via-[#140b2e] to-[#0f0a21] border border-purple-500/30 rounded-3xl p-8 sm:p-14 flex flex-col lg:flex-row items-center justify-between gap-10 shadow-[0_0_50px_rgba(147,51,234,0.15)] relative overflow-hidden">
           
@@ -972,8 +972,11 @@ export default function App() {
               <div className="flex items-center gap-3"><MapPin className="w-4 h-4 text-purple-400" /> Kolkata(WB), India</div>
             </div>
 
+            {/* START A PROJECT BUTTON LINKED TO GOOGLE FORM */}
             <a 
-              href="mailto:halderdeepu114@gmail.com" 
+              href="https://docs.google.com/forms/d/e/1FAIpQLScjTeJ1xOWmRt11e5OL8y3Zw-vrqq8lB34VgK6PB_kqARcGZA/viewform?usp=sharing&ouid=100212699972575262576" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs px-8 py-4 rounded-xl shadow-[0_0_25px_rgba(168,85,247,0.4)] transition-all transform hover:-translate-y-0.5 mt-4"
             >
               Start a Project <ArrowRight className="w-4 h-4" />
